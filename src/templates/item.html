@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Alexa! Let's order food...</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="static/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="static/css/responsive/responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- Preloader Start -->
+<div id="preloader">
+    <div class="yummy-load"></div>
+</div>
+
+<!-- ****** Top Header Area Start ****** -->
+<!--<div class="top_header_area">-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-8 col-sm-8">-->
+<!--<div class="pull-left newsletter-form">-->
+<!--<form action="#" method="post">-->
+<!--<button type="submit"><i class="fa fa-laptop" aria-hidden="true"></i></button>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;  Login Register Area &ndash;&gt;-->
+<!--<div class="col-4 col-sm-4">-->
+<!--<p>Welcome {{ user }}</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- ****** Top Header Area End ****** -->
+
+<!-- ****** Header Area Start ****** -->
+<header class="header_area">
+    <div class="container">
+        <div class="row">
+            <!-- Logo Area Start -->
+            <div class="col-12">
+                <div class="logo_area text-center">
+                    <a href="/" class="yummy-logo">Alexa! Let's order food...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ****** Header Area End ****** -->
+
+<!-- ****** Product Details Start ****** -->
+<div class="section_padding_80">
+    <div class="container">
+        <div class="contact-form-area">
+            <div class="row">
+                <div class="col-12 col-md-2"></div>
+                <div class="col-12 col-md-4">
+                    <!--<div class="contact-form-sidebar item wow fadeInUpBig" data-wow-delay="0.3s"-->
+                    <!--style="background-image: url({{ url }});">-->
+                    <!--</div>-->
+                    <img src={{ url }} alt="" width="150" height="280">
+                </div>
+                <div class="col-12 col-md-4 item">
+                    <div>
+                        <h3 class="contact-form-title mb-30">{{ name }}</h3>
+                    </div>
+                    <span id="stars"></span><br>
+                    Average Rating: <b>{{ '{0:.2f}'.format(rating) }}</b>
+                    <script>
+                            document.getElementById("stars").innerHTML = getStars({{ rating }});
+
+                            function getStars(rating) {
+
+                              // Round to nearest half
+                              rating = Math.round(rating * 2) / 2;
+                              let output = [];
+
+                              // Append all the filled whole stars
+                              for (var i = rating; i >= 1; i--)
+                                output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                              // If there is a half a star, append it
+                              if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                              // Fill the empty stars
+                              for (let i = (5 - rating); i >= 1; i--)
+                                output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                              return output.join('');
+
+                            }
+
+                    </script>
+                    <div>
+                        <h7>Product ID: {{ id }}</h7>
+                    </div>
+                    <br>
+                    <form action="https://www.amazon.com/s/ref=nb_sb_noss/135-8953774-7500823" url=search-alias%3Daps&field-keywords={{key}} method="post" target="_blank">
+                        <button class="btn btn-success" type="submit" value="Buy Now">Buy Now</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ****** Product Details Area Start ****** -->
+
+<div class="breadcumb-item">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="bradcumb-title text-center">
+                    <h2>Items similar to this product</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- ****** Similar Items Start ****** -->
+<section class="welcome-post-sliders owl-carousel">
+
+    {% for key, value in similar.items() %}
+    <!-- Single Slide -->
+    <div class="welcome-single-slide ">
+        <!-- Post Thumb -->
+        <img src={{value[3]}} alt="" width="150" height="280">
+        <!-- Overlay Text -->
+        <div class="project_title">
+            <div class="post-date-commnents d-flex">
+                {{key}} &nbsp;&nbsp;&nbsp;
+                <span id="stars{{key}}"></span><br>
+                <script>
+                    document.getElementById("stars{{key}}").innerHTML = getStars({{ rating }});
+
+                    function getStars(rating) {
+
+                      // Round to nearest half
+                      rating = Math.round(rating * 2) / 2;
+                      let output = [];
+
+                      // Append all the filled whole stars
+                      for (var i = rating; i >= 1; i--)
+                        output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                      // If there is a half a star, append it
+                      if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                      // Fill the empty stars
+                      for (let i = (5 - rating); i >= 1; i--)
+                        output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                      return output.join('');
+
+                    }
+
+                </script>
+            </div>
+            <a href="{{ url_for('item', item=key) }}">
+                <h7>{{value[2]}}</h7>
+            </a>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+<!-- ****** Similar Items End ****** -->
+
+<!-- ****** Helpful Reviews Start ****** -->
+
+<div class="section_padding_80">
+    <div class="breadcumb-item">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>What people say about this ...</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            {% for userId, name in helpful['ProfileName'].items() %}
+
+            <!-- Single Post -->
+            <div class="col-12">
+                <div class="single-post wow fadeInUp" data-wow-delay="1.2s">
+                    <!-- Post Thumb -->
+                    <!--<div class="post-thumb">-->
+                    <!--<img src="static/img/blog-img/5.jpg" alt="">-->
+                    <!--</div>-->
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <div class="post-meta d-flex">
+                            <div class="post-author-date-area d-flex">
+                                <!-- Post item id -->
+                                <div class="post-headline">
+                                    <a href="{{ url_for('user', user=userId) }}">{{name}} </a>
+                                </div>
+                                <div class="post-author">
+                                    &nbsp; says... &nbsp; {{helpful['Summary'][userId]}}&nbsp;&nbsp;
+                                </div>
+                                <div class="post-favourite">
+                                    <a href="#"><i class="fa fa-heart-o"></i> {{helpful['Score'][userId]}}</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Product Name -->
+                        <div class="container">
+                            <h7>{{helpful['Text'][userId]}}</h7>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- ****** Helpful Reviews End ****** -->
+
+<!-- ****** Footer Menu Area Start ****** -->
+<footer class="footer_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Copywrite Text -->
+                <div class="copy_right_text text-center">
+                    <p>Rashmi Ojha | Srishti Agarwal | Mayank Sharma | Ronak Choudhary</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ****** Footer Menu Area End ****** -->
+
+<!-- Jquery-2.2.4 js -->
+<script src="static/js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="static/js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap-4 js -->
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins JS -->
+<script src="static/js/others/plugins.js"></script>
+<!-- Active JS -->
+<script src="static/js/active.js"></script>
+</body>
